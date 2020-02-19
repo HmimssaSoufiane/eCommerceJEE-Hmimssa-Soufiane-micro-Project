@@ -1,6 +1,5 @@
 package servlets;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -17,62 +16,51 @@ import metier.Produit;
 import utils.Identification;
 import utils.Printer;
 
-/**
- * Servlet implementation class AfficherLesDisques
- */
 @WebServlet("/servlet/achat")
 public class AfficherLesDisques extends HttpServlet {
-	
-	
-	
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AfficherLesDisques() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public AfficherLesDisques() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/html");
-		List<Produit> produits=new ProduitDaoImpl().getProduits();
+		PrintWriter out = response.getWriter();
+
 		String nom = null;
 		Cookie[] cookies = request.getCookies();
 		nom = Identification.chercheNom(cookies);
-		PrintWriter out = response.getWriter();
 		
-		out.println("<html>");
-		out.println("<body>");
-		out.println("<head>");
-		out.println("<title> Commande de disques </title>");
-		out.println("<style>"
-					+"th {background-color: #cc6300;color: white;}"
+		if (request.getSession(false)!=null) {
+			
+			List<Produit> produits = new ProduitDaoImpl().getProduits();
+
+			out.println("<html>");
+			out.println("<body>");
+			out.println("<head>");
+			out.println("<title> Commande de disques </title>");
+			out.println("<style>" + "th {background-color: #cc6300;color: white;}"
 					+ " table, td, th {  border: 1px solid;text-align: center;}"
-					+ "table { border-collapse: collapse; width: 70%} "
-					+ "th, td {padding: 15px;}"
-					+ "</style>");
-		out.println("</head>");
-		out.println("<body style=\"background-color:#fff2e6;\">");
-		out.println("<center>");
-		out.println("<h2>" + "Bonjour " + nom + " dans la servlet achat" + "</h2>");
-		out.println("<h3>(Liste des disques pour achat)</h3>");
-		Printer.vente(out, produits);
-		out.println("</center>");
-		out.println("</body>");
-		out.println("</html>");
-	
+					+ "table { border-collapse: collapse; width: 70%} " + "th, td {padding: 15px;}" + "</style>");
+			out.println("</head>");
+			out.println("<body style=\"background-color:#fff2e6;\">");
+			out.println("<center>");
+			out.println("<h2>" + "Bonjour " + nom + " dans la servlet achat" + "</h2>");
+			out.println("<h3>(Liste des disques pour achat)</h3>");
+			Printer.vente(out, produits);
+			out.println("</center>");
+			out.println("</body>");
+			out.println("</html>");
+		}else {
+			response.sendRedirect("servlets/InscriptionClient");
+		}
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

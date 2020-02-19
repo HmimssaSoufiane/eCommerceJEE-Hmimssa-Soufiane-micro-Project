@@ -11,7 +11,7 @@ public class Printer {
 		for (Produit produit : produits) {
 			out.println("<tr> <td>" + produit.getNom() + " " + produit.getPrix()+ " Euros </td>");
 			out.println(" <td><A HREF=\"commande\">");
-			out.println("<IMG SRC=\"/fcexemple/images/panier.gif\" BORDER=0></A><br> </td> </tr>");
+			out.println("<IMG SRC='L:\\JEE2\\eCommerceJEE-Hmimssa-Soufiane-micro--Project\\img\\supermarket.png' width='20' BORDER=0></A><br> </td> </tr>");
 		}
 		out.println("</table> </form>");
 	}

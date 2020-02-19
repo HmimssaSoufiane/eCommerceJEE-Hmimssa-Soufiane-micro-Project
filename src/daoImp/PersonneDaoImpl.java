@@ -9,7 +9,6 @@ import java.util.List;
 
 import dal.DatabaseConnection;
 import dao.PersonneDao;
-import javafx.scene.control.Alert;
 import metier.Personne;
 
 public class PersonneDaoImpl implements PersonneDao{
@@ -68,7 +67,6 @@ public class PersonneDaoImpl implements PersonneDao{
 			preparedStatement.setString(1, Personne.getNom());
 			int rowsInserted = preparedStatement.executeUpdate();
 			if (rowsInserted > 0) {
-				new Alert(Alert.AlertType.INFORMATION, message).showAndWait();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,7 +85,6 @@ public class PersonneDaoImpl implements PersonneDao{
 
 			int rowsUpdated = preparedStatement.executeUpdate();
 			if (rowsUpdated > 0) {
-				new Alert(Alert.AlertType.INFORMATION, message).showAndWait();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -103,7 +100,6 @@ public class PersonneDaoImpl implements PersonneDao{
 			preparedStatement.setInt(1, id);
 			int rowsDeleted = preparedStatement.executeUpdate();
 			if (rowsDeleted > 0) {
-				new Alert(Alert.AlertType.INFORMATION, message).showAndWait();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

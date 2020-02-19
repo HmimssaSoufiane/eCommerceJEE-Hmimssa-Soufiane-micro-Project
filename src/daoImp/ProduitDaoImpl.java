@@ -9,7 +9,6 @@ import java.util.List;
 
 import dal.DatabaseConnection;
 import dao.ProduitDao;
-import javafx.scene.control.Alert;
 import metier.Produit;
 
 public class ProduitDaoImpl implements ProduitDao {
@@ -17,11 +16,9 @@ public class ProduitDaoImpl implements ProduitDao {
 	ResultSet resultSet;
 	DatabaseConnection databaseConnection;
 	String message = "l\'operation est terminee avec succes";
-
 	public ProduitDaoImpl() {
 		databaseConnection = DatabaseConnection.getInstance();
 	}
-
 	@Override
 	public List<Produit> getProduits() {
 		List<Produit> Produits = new ArrayList<Produit>();
@@ -39,11 +36,9 @@ public class ProduitDaoImpl implements ProduitDao {
 		}
 		return Produits;
 	}
-
 	@Override
 	public Produit getProduit(int num) {
 		Produit Produit = null;
-
 		try {
 			statement = databaseConnection.getConnection().createStatement();
 			PreparedStatement preparedStatement = databaseConnection.getConnection()
@@ -59,7 +54,6 @@ public class ProduitDaoImpl implements ProduitDao {
 		}
 		return Produit;
 	}
-
 	@Override
 	public void addProduit(Produit Produit) {
 		try {
@@ -68,14 +62,11 @@ public class ProduitDaoImpl implements ProduitDao {
 			preparedStatement.setString(1, Produit.getNom());
 			int rowsInserted = preparedStatement.executeUpdate();
 			if (rowsInserted > 0) {
-				new Alert(Alert.AlertType.INFORMATION, message).showAndWait();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 	@Override
 	public void updateProduit(Produit Produit) {
 		try {
@@ -87,14 +78,11 @@ public class ProduitDaoImpl implements ProduitDao {
 
 			int rowsUpdated = preparedStatement.executeUpdate();
 			if (rowsUpdated > 0) {
-				new Alert(Alert.AlertType.INFORMATION, message).showAndWait();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 	@Override
 	public void deleteProduit(String id) {
 		try {
@@ -103,7 +91,6 @@ public class ProduitDaoImpl implements ProduitDao {
 			preparedStatement.setString(1, id);
 			int rowsDeleted = preparedStatement.executeUpdate();
 			if (rowsDeleted > 0) {
-				new Alert(Alert.AlertType.INFORMATION, message).showAndWait();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
