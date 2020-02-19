@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/dal/DatabaseConnection.java=UTF-8
+encoding//src/daoImp/CommandeDaoImpl.java=UTF-8
+encoding//src/daoImp/PanierDaoImpl.java=UTF-8
+encoding//src/daoImp/PersonneDaoImpl.java=UTF-8
