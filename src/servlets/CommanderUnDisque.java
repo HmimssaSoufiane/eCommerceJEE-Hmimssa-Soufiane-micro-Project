@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import daoImp.PanierDaoImpl;
+import daoImp.PersonneDaoImpl;
 import metier.Panier;
+import metier.Personne;
 import utils.Identification;
 
 /**
@@ -38,14 +41,15 @@ public class CommanderUnDisque extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String nom = null;
+		int motPasse;
 		int numberOfPruducts = 0;
 		Cookie[] cookies = request.getCookies();
 
 		nom = Identification.chercheNom(cookies);
-
+		motPasse=Identification.chercheNum(cookies);
 		if (request.getSession(false) != null) {
-
-			ArrayList<Panier> paniers = new daoIm
+			Personne personne=new PersonneDaoImpl().getPersonne(motPasse);//num not nom
+			ArrayList<Panier> paniers = (ArrayList<Panier>) new PanierDaoImpl().getPaniers(personne);
 			
 
 			response.setContentType("text/html");

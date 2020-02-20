@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImp.PanierDaoImpl;
-import metier.Panier;
+import daoImp.ProduitDaoImpl;
+import metier.Produit;
 import utils.Identification;
+import utils.Printer;
 
 @WebServlet("/servlet/achat")
 public class AfficherLesDisques extends HttpServlet {
@@ -31,27 +32,27 @@ public class AfficherLesDisques extends HttpServlet {
 		String nom = null;
 		Cookie[] cookies = request.getCookies();
 		nom = Identification.chercheNom(cookies);
-		
-		if (request.getSession(false)!=null) {
-			
-			List<Panier> paniers = new PanierDaoImpl().getPaniers();
+
+		if (request.getSession(false) != null) {
+
+			List<Produit> produits = new ProduitDaoImpl().getProduits();
 			out.println("<html>");
 			out.println("<body>");
 			out.println("<head>");
 			out.println("<title> Commande de disques </title>");
 			out.println("<style>" + "th {background-color: #cc6300;color: white;}"
-					+ " table, td, th {  border: 1px solid;text-align: center;}"
+					+ "table, td, th {  border: 1px solid;text-align: center;}"
 					+ "table { border-collapse: collapse; width: 70%} " + "th, td {padding: 15px;}" + "</style>");
 			out.println("</head>");
 			out.println("<body style=\"background-color:#fff2e6;\">");
 			out.println("<center>");
 			out.println("<h2>" + "Bonjour " + nom + " dans la servlet achat" + "</h2>");
 			out.println("<h3>(Liste des disques pour achat)</h3>");
-//			Printer.vente(out, paniers);
+			Printer.vente(out, produits);
 			out.println("</center>");
 			out.println("</body>");
 			out.println("</html>");
-		}else {
+		} else {
 			response.sendRedirect("servlets/InscriptionClient");
 		}
 
