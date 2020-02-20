@@ -48,7 +48,7 @@ public class CommanderUnDisque extends HttpServlet {
 		nom = Identification.chercheNom(cookies);
 		motPasse=Identification.chercheNum(cookies);
 		if (request.getSession(false) != null) {
-			Personne personne=new PersonneDaoImpl().getPersonne(motPasse);//num not nom
+			Personne personne=new PersonneDaoImpl().getPersonne(motPasse);//mot de passe is the num 
 			ArrayList<Panier> paniers = (ArrayList<Panier>) new PanierDaoImpl().getPaniers(personne);
 			
 

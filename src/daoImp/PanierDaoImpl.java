@@ -53,7 +53,7 @@ public class PanierDaoImpl implements PanierDao {
 
 		try {
 			statement = databaseConnection.getConnection().createStatement();
- 			resultSet = statement.executeQuery("SELECT * FROM `panier` p,`commande` c WHERE p.numCommande=c.num and c.numeroPersonn="+personne.getNumero());
+ 			resultSet = statement.executeQuery("SELECT * FROM `panier` p,`commande` c WHERE p.numCommande=c.num and p.etat='au panier' and c.numeroPersonn="+personne.getNumero());
 			
 			while (resultSet.next()) {
 				Panier c = new Panier();
