@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImp.ProduitDaoImpl;
-import metier.Produit;
+import daoImp.PanierDaoImpl;
+import metier.Panier;
 import utils.Identification;
-import utils.Printer;
 
 @WebServlet("/servlet/achat")
 public class AfficherLesDisques extends HttpServlet {
@@ -35,8 +34,7 @@ public class AfficherLesDisques extends HttpServlet {
 		
 		if (request.getSession(false)!=null) {
 			
-			List<Produit> produits = new ProduitDaoImpl().getProduits();
-
+			List<Panier> paniers = new PanierDaoImpl().getPaniers();
 			out.println("<html>");
 			out.println("<body>");
 			out.println("<head>");
@@ -49,7 +47,7 @@ public class AfficherLesDisques extends HttpServlet {
 			out.println("<center>");
 			out.println("<h2>" + "Bonjour " + nom + " dans la servlet achat" + "</h2>");
 			out.println("<h3>(Liste des disques pour achat)</h3>");
-			Printer.vente(out, produits);
+//			Printer.vente(out, paniers);
 			out.println("</center>");
 			out.println("</body>");
 			out.println("</html>");

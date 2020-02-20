@@ -12,6 +12,7 @@ import dao.CommandeDao;
 import dao.PanierDao;
 import dao.ProduitDao;
 import metier.Panier;
+import metier.Personne;
 
 public class PanierDaoImpl implements PanierDao {
 	Statement statement;
@@ -46,13 +47,29 @@ public class PanierDaoImpl implements PanierDao {
 		}
 		return Paniers;
 	}
+	@Override
+	public List<Panier> getPaniers(Personne personne) {
+		List<Panier> Paniers = new ArrayList<Panier>();
+
+		try {
+			statement = databaseConnection.getConnection().createStatement();
+ 			resultSet = statement.executeQuery("SELECT * FROM `panier` p,`commande` c WHERE p.numCommande=c.num and c.numeroPersonn="+personne.getNumero());
+			
+			while (resultSet.next()) {
+				Panier c = new Panier();
+				Paniers.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Paniers;
+	}
 
 	@Override
 	public Panier getPanier(int id) {
 		Panier Panier = null;
 
 		try {
-			statement = databaseConnection.getConnection().createStatement();
 			PreparedStatement preparedStatement = databaseConnection.getConnection()
 					.prepareStatement("SELECT `numCommande`, `numProduit` FROM `panier` WHERE  num=?");
 			preparedStatement.setInt(1, id);
