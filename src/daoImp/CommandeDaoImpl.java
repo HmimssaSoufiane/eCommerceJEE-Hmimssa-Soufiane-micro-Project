@@ -49,8 +49,7 @@ public class CommandeDaoImpl implements CommandeDao {
 		Commande Commande = null;
 
 		try {
-			statement = databaseConnection.getConnection().createStatement();
-			PreparedStatement preparedStatement = databaseConnection.getConnection()
+ 			PreparedStatement preparedStatement = databaseConnection.getConnection()
 					.prepareStatement("SELECT * FROM `commande` WHERE num=?");
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();

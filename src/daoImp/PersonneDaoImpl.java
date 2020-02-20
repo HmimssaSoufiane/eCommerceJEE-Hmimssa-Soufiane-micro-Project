@@ -44,8 +44,7 @@ public class PersonneDaoImpl implements PersonneDao{
 		Personne Personne = null;
 
 		try {
-			statement = databaseConnection.getConnection().createStatement();
-			PreparedStatement preparedStatement = databaseConnection.getConnection()
+ 			PreparedStatement preparedStatement = databaseConnection.getConnection()
 					.prepareStatement("select * from Personne where numero=?");
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();

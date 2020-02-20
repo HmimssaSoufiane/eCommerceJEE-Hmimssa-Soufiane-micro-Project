@@ -40,8 +40,7 @@ public class ProduitDaoImpl implements ProduitDao {
 	public Produit getProduit(int num) {
 		Produit Produit = null;
 		try {
-			statement = databaseConnection.getConnection().createStatement();
-			PreparedStatement preparedStatement = databaseConnection.getConnection()
+ 			PreparedStatement preparedStatement = databaseConnection.getConnection()
 					.prepareStatement("SELECT * FROM `produit` WHERE num=?");
 			preparedStatement.setInt(1, num);
 			resultSet = preparedStatement.executeQuery();
